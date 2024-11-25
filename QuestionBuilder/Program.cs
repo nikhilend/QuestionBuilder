@@ -3,9 +3,9 @@ using QuestionBuilder.Data;
 using QuestionBuilder.DTO;
 
 Console.WriteLine("------------------QUESTION BUILDER-----------------------------");
-Console.WriteLine("User Name : admin | Password : admin | for ADMIN Login---------");
-Console.WriteLine("User Name : trainer | Password : trainer | for TRAINER Login---");
-Console.WriteLine("User Name : employee | Password : admin | for EMPLOYEE Login---");
+Console.WriteLine("User Name : admin    | Password : admin   | for ADMIN Login---------");
+Console.WriteLine("User Name : trainer  | Password : trainer | for TRAINER Login---");
+Console.WriteLine("User Name : employee | Password : admin   | for EMPLOYEE Login---");
 Console.WriteLine("---------------------------------------------------------------");
 
 List<User> userData = UserData.GetUserData();
@@ -346,13 +346,25 @@ void Trainer()
                 questionBank.Id = questionBanks.Count + 1;
                 questionBank.Name = qbName;
                 questionBank.Curriculum = curriculum;
-
-                questionBank.Questions = OpenAIChatResponse.GenerateQuestions(curriculum);
+                
+                try
+                {
+                    questionBank.Questions = OpenAIChatResponse.GenerateQuestions(curriculum);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("---------------------------------------------------------------");
+                    Console.WriteLine("Qustion Bank Creation failed due to some technical problem : ");
+                    Console.WriteLine("MSG : " + e.Message);
+                    Console.WriteLine("---------------------------------------------------------------");
+                }
 
                 questionBanks.Add(questionBank);
 
                 PreviewQuestionBank(questionBank);
-                Console.WriteLine("--------------------------QUESTION BANK CREATED SUCCESSFULLY---");
+
+                
+                Console.WriteLine("-------------QUESTION BANK CREATED SUCCESSFULLY----------------");
 
                 break;
             case "2":
