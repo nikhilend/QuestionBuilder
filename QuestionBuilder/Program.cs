@@ -11,15 +11,14 @@ Console.WriteLine("-------------------------------------------------------------
 List<User> userData = UserData.GetUserData();
 List<QuestionBank> questionBanks = new List<QuestionBank>();
 
-try
+// LOGIN
+bool login = true;
+
+while (login)
 {
-    
-
-    // LOGIN
-    bool login = true;
-
-    while (login)
+    try
     {
+
         Console.WriteLine("--------------------------HOME---------------------------------");
         Console.WriteLine("1. Login");
         Console.WriteLine("2. Exit");
@@ -96,15 +95,19 @@ try
         }
 
     }
-}
-catch(Exception e)
-{
-    Console.WriteLine("---------------------------------------------------------------");
-    Console.WriteLine("---------Something Went wrong ---------------------------------");
-    Console.WriteLine(e.Message);
-    Console.WriteLine("---------------------------------------------------------------");
+    catch (Exception e)
+    {
+        Console.WriteLine("---------------------------------------------------------------");
+        Console.WriteLine("---------Something Went wrong Please Login and try again-------");
+        Console.WriteLine(e.Message);
+        Console.WriteLine("---------------------------------------------------------------");
+
+    }
+   
 
 }
+
+
 
 
 void Employee()
